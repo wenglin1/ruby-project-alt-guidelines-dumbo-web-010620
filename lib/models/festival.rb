@@ -1,5 +1,5 @@
 class Festival < ActiveRecord::Base
-    has_many :sets
-    has_many :djs, through: :sets
+    has_many :play_sets
+    has_many :djs, through: :play_sets
     
 end

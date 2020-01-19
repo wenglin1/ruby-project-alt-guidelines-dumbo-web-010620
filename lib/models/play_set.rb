@@ -1,4 +1,4 @@
-class Set < ActiveRecord::Base
+class PlaySet < ActiveRecord::Base
     belongs_to :dj
     belongs_to :festival
     
