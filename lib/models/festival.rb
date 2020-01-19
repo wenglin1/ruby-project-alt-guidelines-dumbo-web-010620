@@ -24,11 +24,14 @@ class Festival < ActiveRecord::Base
 
     def festival_menu
         #tty prompt menu
-        #options--festival names
-        #hire a dj
-        #change festival info
+        #options--festival names, hire a dj, change festival info
+        #festival names -> all_festivals
+        #hire a dj -> all_dj's
+        #change festival info -> change_info
         #exit- goes back to main menu
     end
+
+
 
     def self.get_full_list
         self.all.map do |fest|
