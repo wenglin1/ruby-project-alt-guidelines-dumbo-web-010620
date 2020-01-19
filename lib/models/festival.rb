@@ -31,9 +31,16 @@ class Festival < ActiveRecord::Base
         #exit- goes back to main menu
     end
 
+    def all_festivals
+        #list all owned festivals
+        #if no owned festivals puts "You arent running any festivals, would you like to create one?"
+        #new_festival 
+        #exit -> festival_menu
+    end
 
 
-    def self.get_full_list
+
+    def self.all_festivals
         self.all.map do |fest|
             fest.name
         end
