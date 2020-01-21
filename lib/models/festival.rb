@@ -36,7 +36,7 @@ class Festival < ActiveRecord::Base
     end
 
     def self.user_return
-        puts "Welcome back! Enter you login information"
+        puts "Welcome back! Enter your login information"
         name = gets.chomp
         # call .wrong_input method if cannot find the name, otherwise call .main_menu
           if !Festival.find_by(promoter: name)
