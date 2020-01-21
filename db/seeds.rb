@@ -10,12 +10,8 @@ slander = Dj.create(name: "Slander", genre: "Dubstep", rate: 80000)
 dabin = Dj.create(name: "Dabin", genre: "Future Bass", rate: 40000)
 said_the_sky = Dj.create(name: "Said the Sky", genre: "Future Bass", rate: 50000)
 yellow_claw = Dj.create(name: "Yellow Claw", genre: "Trap", rate: 70000)
-<<<<<<< HEAD
-zedd = Dj.create(name: "Zedd", genre: "pop", rate: 120000)
-=======
 zedd = Dj.create(name: "Pop", genre: "pop", rate: 120000)
 
->>>>>>> a58a8962dcb5f1a4e8442ce03a3a5c60e3eaaf30
 
 
 

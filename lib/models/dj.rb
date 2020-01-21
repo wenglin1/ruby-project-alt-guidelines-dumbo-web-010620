@@ -13,11 +13,7 @@ class Dj < ActiveRecord::Base
     def self.new_user
         puts "What is your name?"
             name = gets.chomp
-<<<<<<< HEAD
-        if Dj.find_by(self.name)
-=======
         if Dj.find_by(name: name)
->>>>>>> a58a8962dcb5f1a4e8442ce03a3a5c60e3eaaf30
             #self.duplicate_names(name)
         else
             sleep(0.2)
@@ -27,10 +23,6 @@ class Dj < ActiveRecord::Base
             dj_rate = gets.chomp.to_i
             dj_info = Dj.create(name: name, genre: dj_genre, rate: dj_rate)
             App.wipe_screen
-<<<<<<< HEAD
-=======
-
->>>>>>> a58a8962dcb5f1a4e8442ce03a3a5c60e3eaaf30
             self.dj_menu
         end
         #request login informtion

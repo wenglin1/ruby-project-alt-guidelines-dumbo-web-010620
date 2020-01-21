@@ -87,7 +87,7 @@ class Festival < ActiveRecord::Base
             n.name
         end
         djs.each_with_index do |n, i|
-            puts "#{1 + i}. #{n}."
+            puts "#{1 + i}. #{n}"
         end
     end
     
