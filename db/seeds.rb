@@ -14,6 +14,7 @@ zedd = Dj.create(name: "Pop", genre: "pop", rate: 120000)
 
 
 
+
 ###AVAILABLE_FESTIVALS
 gmb = Festival.create(name: "Governers Ball Music festival 2020", location: "Governers Island, New York", budget: 1500000, date: 'May 05, 2020', promoter: "Avi Blum")
 cochella = Festival.create(name: "Coachella", location: "Indio, California", budget: 1200000, date:'April 30, 2020', promoter: "James Dolan")
