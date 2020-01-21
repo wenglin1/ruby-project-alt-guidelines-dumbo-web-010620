@@ -13,7 +13,7 @@ class Dj < ActiveRecord::Base
     def self.new_user
         puts "What is your name?"
             name = gets.chomp
-        if Dj.find_by(name)
+        if Dj.find_by(self.name)
             #self.duplicate_names(name)
         else
             sleep(0.2)
@@ -22,12 +22,12 @@ class Dj < ActiveRecord::Base
         puts "What is your hiring rate?"
             dj_rate = gets.chomp
             App.wipe_screen
-            self.festival_menu
+            self.dj_menu
         end
         #request login informtion
         #if user already exists, then puts "user already exists"and send to user_return
-        #else, create new festival instance by name
-        #run festival_info method
+        #else, create new dj instance by name
+        #run dj_info method
     end
 
     def self.user_return
@@ -41,16 +41,16 @@ class Dj < ActiveRecord::Base
               self.dj_menu
           end
         #allow user to log in with previous information
-        #run festival_menu method
+        #run dj_menu method
     end
 
     def self.d_menu
         self.all_dj
         #tty prompt menu
-        #options--festival names, hire a dj, change festival info
-        #festival names -> all_festivals
+        #options--dj names, hire a dj, change dj info
+        #dj names -> all_djs
         #hire a dj -> all_dj's
-        #change festival info -> change_info
+        #change dj info -> change_info
         #exit- goes back to main menu
     end
 
@@ -67,6 +67,6 @@ class Dj < ActiveRecord::Base
           dj.name == name.id
         end
         dj_name = TTY::Prompt.new.select("Here are all the available DJs. Select one for more details:", dj)
-        dj_info = self.find_by(name)
+        dj_info = self.find_by(se.fname)
     end
 end
