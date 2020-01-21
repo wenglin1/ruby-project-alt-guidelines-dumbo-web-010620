@@ -70,7 +70,7 @@ class Festival < ActiveRecord::Base
 
     def self.all_festivals
          festivals = self.all.map do |fest|
-          fest.name
+          fest.promoter == promoter.id
         end
         fest_name = TTY::Prompt.new.select("Here are all the tours. Pick one to see more details:", festivals)
         fest_info = self.find_by(name: fest_name)
