@@ -36,7 +36,7 @@ class Dj < ActiveRecord::Base
         name = gets.chomp
         # call .wrong_input method if cannot find the name, otherwise call .main_menu
           if !Dj.find_by(name: name)
-              self.wrong_input
+              self.reject_input
           else
               dj_info = Dj.find_by(name: name)
               self.dj_menu
@@ -61,13 +61,17 @@ class Dj < ActiveRecord::Base
         #exit -> dj_menu
     end
 
+    def self.reject_input
+        puts "Sorry, that name does not exist in our system, please try again"
+        self.user_return
+    end
 
 
-    def self.all_djs
-         djs = self.all.map do |dj|
-          dj.name == name.id
+    def self.all_festivals
+         djs = Festival.all.map do |festival|
+          festival.name
         end
-        dj_name = TTY::Prompt.new.select("Here are all the available DJs. Select one for more details:", dj)
-        dj_info = self.find_by(se.fname)
+        festival_name = TTY::Prompt.new.select("Here are all the available Festivals. Select one for more details:", dj)
+        festival_info = Festival.find_by(name: festival_name)
     end
 end
