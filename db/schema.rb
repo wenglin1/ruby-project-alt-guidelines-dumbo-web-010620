@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_202652) do
+ActiveRecord::Schema.define(version: 2020_01_21_161324) do
 
   create_table "dj", force: :cascade do |t|
+    t.string "name"
+    t.string "genre"
+    t.integer "rate"
+  end
+
+  create_table "djs", force: :cascade do |t|
     t.string "name"
     t.string "genre"
     t.integer "rate"

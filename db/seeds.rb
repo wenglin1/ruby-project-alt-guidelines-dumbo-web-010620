@@ -4,13 +4,13 @@ DatabaseCleaner.clean_with(:truncation)
 Festival.destroy_all 
 
 ###DJs
-rl_grime = Festival.create(name: "RL Grime", genre: "Trap", rate: 85000)
-illenium = Festival.create(name: "Illenium", genre: "Future Bass", rate: 90000)
-slander = Festival.create(name: "Slander", genre: "Dubstep", rate: 80000)
-dabin = Festival.create(name: "Dabin", genre: "Future Bass", rate: 40000)
-said_the_sky = Festival.create(name: "Said the Sky", genre: "Future Bass", rate: 50000)
-yellow_claw = Festival.create(name: "Yellow Claw", genre: "Trap", rate: 70000)
-zedd = Festival.create(name: "Pop", genre: "pop", rate: 120000)
+rl_grime = Dj.create(name: "RL Grime", genre: "Trap", rate: 85000)
+illenium = Dj.create(name: "Illenium", genre: "Future Bass", rate: 90000)
+slander = Dj.create(name: "Slander", genre: "Dubstep", rate: 80000)
+dabin = Dj.create(name: "Dabin", genre: "Future Bass", rate: 40000)
+said_the_sky = Dj.create(name: "Said the Sky", genre: "Future Bass", rate: 50000)
+yellow_claw = Dj.create(name: "Yellow Claw", genre: "Trap", rate: 70000)
+zedd = Dj.create(name: "Pop", genre: "pop", rate: 120000)
 
 
 
