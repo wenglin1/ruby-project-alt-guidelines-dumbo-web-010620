@@ -18,10 +18,10 @@ class App
 
 #*****************MAIN MENU**********************
     def main_menu
-        answer = prompt.select("Are you a Dj or a  Festival?") do |menu|
-            menu.choice "Dj", -> {Dj.menu}
-            menu.choice "Festival", -> {Festival.menu}
-            menu.choice "Exit", -> {App.end}
+        answer = prompt.select("Are you a Dj or a  Festival?") do |item|
+            item.choice "Dj", -> {Dj.menu}
+            item.choice "Promoter", -> {Festival.menu}
+            item.choice "Exit", -> {App.end}
         end
     end
 
