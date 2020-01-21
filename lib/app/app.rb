@@ -6,10 +6,14 @@ class App
         @prompt = TTY::Prompt.new
     end 
 #*****************APP LOAD SCREEN****************
+    def app_start
+        welcome
+        main_menu
+    end
+
     def welcome
         App.wipe_screen
         puts "Welcome"
-        main_menu
     end
 
 #*****************MAIN MENU**********************
