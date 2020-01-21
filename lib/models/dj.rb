@@ -32,9 +32,8 @@ class Dj < ActiveRecord::Base
     end
 
     def self.user_return
-        puts "Welcome back! Enter your login information"
+        puts "Enter your login information"
         name = gets.chomp
-        # call .wrong_input method if cannot find the name, otherwise call .main_menu
           if !Dj.find_by(name: name)
               self.reject_input
           else
@@ -46,19 +45,12 @@ class Dj < ActiveRecord::Base
     end
 
     def self.dj_menu
-        self.all_djs
         #tty prompt menu
-        #options--dj names, hire a dj, change dj info
-        #dj names -> all_djs
-        #hire a dj -> all_dj's
-        #change dj info -> change_info
+        #options--Current sets/Book a set/Cancel account
+        #current_sets.item -> all_sets(owned by dj)
+        #book_set.item -> new_set
+        #cancel_account.item -> destroy_dj
         #exit- goes back to main menu
-    end
-
-    def all_djs
-        #list all djs, if no djs puts "There are no djs, would you like to register one?"
-        #new_dj 
-        #exit -> dj_menu
     end
 
     def self.reject_input
