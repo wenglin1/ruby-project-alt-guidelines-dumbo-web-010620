@@ -13,15 +13,24 @@ class Dj < ActiveRecord::Base
     def self.new_user
         puts "What is your name?"
             name = gets.chomp
+<<<<<<< HEAD
         if Dj.find_by(self.name)
+=======
+        if Dj.find_by(name: name)
+>>>>>>> a58a8962dcb5f1a4e8442ce03a3a5c60e3eaaf30
             #self.duplicate_names(name)
         else
             sleep(0.2)
         puts "What genre of electronic dance music do you play?"
             dj_genre = gets.chomp
         puts "What is your hiring rate?"
-            dj_rate = gets.chomp
+            dj_rate = gets.chomp.to_i
+            dj_info = Dj.create(name: name, genre: dj_genre, rate: dj_rate)
             App.wipe_screen
+<<<<<<< HEAD
+=======
+
+>>>>>>> a58a8962dcb5f1a4e8442ce03a3a5c60e3eaaf30
             self.dj_menu
         end
         #request login informtion
@@ -34,18 +43,18 @@ class Dj < ActiveRecord::Base
         puts "Welcome back! Enter your login information"
         name = gets.chomp
         # call .wrong_input method if cannot find the name, otherwise call .main_menu
-          if !Dj.find_by(name)
+          if !Dj.find_by(name: name)
               self.wrong_input
           else
-              dj_info = Dj.find_by(name)
+              dj_info = Dj.find_by(name: name)
               self.dj_menu
           end
         #allow user to log in with previous information
         #run dj_menu method
     end
 
-    def self.d_menu
-        self.all_dj
+    def self.dj_menu
+        self.all_djs
         #tty prompt menu
         #options--dj names, hire a dj, change dj info
         #dj names -> all_djs
