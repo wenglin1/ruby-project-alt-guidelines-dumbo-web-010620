@@ -1,7 +1,10 @@
 class Dj < ActiveRecord::Base
     has_many :play_sets
     has_many :festivals, through: :play_sets
+   
     
+#*******************MENUS********************
+#*******************************************
     def self.menu
         TTY::Prompt.new.select("Hi! Are you a new or returning DJ?") do |menu_item|
             menu_item.choice "I'm a new DJ", -> {self.new_user}
@@ -53,11 +56,24 @@ class Dj < ActiveRecord::Base
         #exit- goes back to main menu
     end
 
+
+#**************HELPERS******************
+#***************************************
     def self.reject_input
         puts "Sorry, that name does not exist in our system, please try again"
         self.user_return
     end
 
+    def self.get_sets
+        #get list of all sets where the dj is performing
+        #check against matching dj_id
+    end
+
+    def book_set
+        #self.get_sets- an array
+        #take array and use items to form selectable menu
+        #attach dj to a set if dj does not have set booked during designated time
+    end
 
     def self.all_festivals
          djs = Festival.all.map do |festival|
@@ -65,5 +81,9 @@ class Dj < ActiveRecord::Base
         end
         festival_name = TTY::Prompt.new.select("Here are all the available Festivals. Select one for more details:", dj)
         festival_info = Festival.find_by(name: festival_name)
+    end
+
+    def end_account
+        #destroy dj data
     end
 end
