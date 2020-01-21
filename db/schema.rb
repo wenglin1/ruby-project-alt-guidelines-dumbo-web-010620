@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_01_19_202652) do
     t.string "location"
     t.integer "budget"
     t.date "date"
+    t.string "promoter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

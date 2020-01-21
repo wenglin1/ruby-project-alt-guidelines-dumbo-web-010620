@@ -12,16 +12,22 @@ class Festival < ActiveRecord::Base
 
     def self.new_user
         puts "What is your name?"
-        name = gets.chomp
+            name = gets.chomp
         if Festival.find_by(promoter: name)
-            self.handle_duplicate_names(name)
+            #self.duplicate_names(name)
         else
             sleep(0.2)
         puts "What would you like to call your festival?"
+            festival_name = gets.chomp
+        puts "What is your budget for your festival? please enter in numbers in the following format :1234)"
             festival_budget = gets.chomp.to_i
-            festival_info = Festival.create(promoter: name, budget: group_size)
-            system 'clear'
-            self.book_tour_menu(tourist_instance)
+        puts "Where would you like to have #{festival_name}?"
+            festival_loc = gets.chomp
+        puts "When would you like to have #{festival_name}?"
+            date = gets.chomp
+            festival_info = Festival.create(name: festival_name, location: festival_loc, budget:festival_budget, date: date,promoter: name)
+            App.wipe_screen
+            self.festival_menu
         end
         #request login informtion
         #if user already exists, then puts "user already exists"and send to user_return
@@ -33,17 +39,18 @@ class Festival < ActiveRecord::Base
         puts "Welcome back! Enter you login information"
         name = gets.chomp
         # call .wrong_input method if cannot find the name, otherwise call .main_menu
-          if !Festival.find_by(name: name)
+          if !Festival.find_by(promoter: name)
               self.wrong_input
           else
-              festival_info = Festival.find_by(name: name)
-              self.returning_main_menu(festival_info)
+              festival_info = Festival.find_by(promoter: name)
+              self.festival_menu
           end
         #allow user to log in with previous information
         #run festival_menu method
     end
 
-    def festival_menu
+    def self.festival_menu
+        self.all_festivals
         #tty prompt menu
         #options--festival names, hire a dj, change festival info
         #festival names -> all_festivals
@@ -66,7 +73,7 @@ class Festival < ActiveRecord::Base
           fest.name
         end
         fest_name = TTY::Prompt.new.select("Here are all the tours. Pick one to see more details:", festivals)
-        tour_info = self.find_by(name: fest_name)
+        fest_info = self.find_by(name: fest_name)
     end
     
 end
