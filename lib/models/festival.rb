@@ -1,11 +1,12 @@
 class Festival < ActiveRecord::Base
+    belongs_to :promoter
     has_many :play_sets
     has_many :djs, through: :play_sets
 
     def self.menu
         TTY::Prompt.new.select("Hi! Would you like to log in or create a festival?") do |menu_item|
-            menu_item.choice "I am a new festival", -> {self.new_user}
-            menu_item.choice "Nope, I'm about that festival life", -> {self.user_return}
+            menu_item.choice "I am a new promoter", -> {self.new_user}
+            menu_item.choice "Nope, I promote festivals", -> {self.user_return}
             menu_item.choice "Take me back to the main menu", -> {App.end}
           end
     end
@@ -58,7 +59,7 @@ class Festival < ActiveRecord::Base
         self.get_djs
         #self.all_festivals
         #tty prompt menu
-        #options--festival names, hire a dj, change festival info
+        #options--my_festivals, hire a dj, change festival info
         #festival names -> all_festivals
         #hire a dj -> all_dj's
         #change festival info -> change_info
@@ -70,6 +71,19 @@ class Festival < ActiveRecord::Base
         #if no owned festivals puts "You arent running any festivals, would you like to create one?"
         #new_festival 
         #exit -> festival_menu
+    end
+
+    def method_name
+        
+        specific_promotor()
+    end
+
+    def specific_promotor(pro)
+       promo = Festival.all.select do |variable_in|
+            variable_in.promoter == pro
+        end
+    #    promo_name =  self.prompt.select("what's your name promotor")
+       
     end
 
 

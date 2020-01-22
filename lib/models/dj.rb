@@ -49,14 +49,13 @@ class Dj < ActiveRecord::Base
 
     def self.dj_menu
         #tty prompt menu
-        #options--Current sets/Book a set/Cancel account
-        #current_sets.item -> all_sets(owned by dj)
-        #book_set.item -> new_set
+        #current_sets.item -> my_sets(owned by dj)
+        #book_set.item -> book_set
         #cancel_account.item -> destroy_dj
         #exit- goes back to main menu
     end
 
-
+#**************************************
 #**************HELPERS******************
 #***************************************
     def self.reject_input
@@ -64,13 +63,17 @@ class Dj < ActiveRecord::Base
         self.user_return
     end
 
-    def self.get_sets
-        #get list of all sets where the dj is performing
-        #check against matching dj_id
+    def get_sets
+        #map list of available sets not belonging to the dj
+    end
+
+    def self.my_sets
+        #pull get_sets
+        #filter and collect all sets matchung dj_id
     end
 
     def book_set
-        #self.get_sets- an array
+        #self.set_select- an array
         #take array and use items to form selectable menu
         #attach dj to a set if dj does not have set booked during designated time
     end
