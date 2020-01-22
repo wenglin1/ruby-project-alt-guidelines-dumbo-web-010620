@@ -20,7 +20,7 @@ class App
     def main_menu
         answer = prompt.select("Are you a Dj or a  Promoter?") do |item|
             item.choice "Dj", -> {Dj.menu}
-            item.choice "Promoter", -> {Festival.menu}
+            item.choice "Promoter", -> {Promoter.menu}
             item.choice "Exit", -> {App.end}
         end
     end
@@ -33,9 +33,9 @@ class App
     def self.end
         
             puts "
-                        THANKS FOR CHOOSING BOOK MATE".colorize(:light_yellow)
+                        THANKS FOR STOPPING BY!!".colorize(:light_yellow)
             puts "
-                                SEE YOU SOON \u{1f44B}".colorize(:light_yellow)
+                                COME BACK AGAIN!! \u{1f44B}".colorize(:light_yellow)
             
     end
 end

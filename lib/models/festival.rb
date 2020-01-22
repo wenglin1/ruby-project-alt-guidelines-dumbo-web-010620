@@ -12,11 +12,6 @@ class Festival < ActiveRecord::Base
     end
 
     def self.new_festival
-        puts "What is your name?"
-            name = gets.chomp
-        if Festival.find_by(promoter: name)
-            #self.duplicate_names(name)
-        else
             sleep(0.2)
         puts "What would you like to call your festival?"
             festival_name = gets.chomp
@@ -29,7 +24,6 @@ class Festival < ActiveRecord::Base
             festival_info = Festival.create(name: festival_name, location: festival_loc, budget:festival_budget, date: date,promoter: name)
             App.wipe_screen
             self.festival_menu
-        end
         #request login informtion
         #if user already exists, then puts "user already exists"and send to user_return
         #else, create new festival instance by name
