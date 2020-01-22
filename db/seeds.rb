@@ -24,3 +24,8 @@ woodstock = Festival.create(name: "Woodstock 2020", location: "Woodstock, New Yo
 summer_jam = Festival.create(name: "Summer Jam 2020", location: "East Rutherford, New Jersey", budget:675000, date: 'June 6, 2020')
 dance_frenzy = Festival.create(name: "Dance Party 2020", location: "TBD", budget: 1200000, date: 'September 30, 2020')
 
+
+s1 = PlaySet.create(dj_id: 2, festival_id: 1, duration: 98)
+s2 = PlaySet.create(dj_id: 2, festival_id: 2, duration: 98)
+s3 = PlaySet.create(dj_id: 2, festival_id: 3, duration: 98)
+s4 = PlaySet.create(dj_id: 2, festival_id: 4, duration: 98)

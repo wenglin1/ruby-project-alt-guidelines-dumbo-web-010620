@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_01_21_161324) do
 
-  create_table "dj", force: :cascade do |t|
-    t.string "name"
-    t.string "genre"
-    t.integer "rate"
-  end
-
   create_table "djs", force: :cascade do |t|
     t.string "name"
     t.string "genre"
@@ -36,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_161324) do
   create_table "play_sets", force: :cascade do |t|
     t.integer "dj_id"
     t.integer "festival_id"
-    t.date "date"
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

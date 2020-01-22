@@ -3,7 +3,7 @@ class CreatePlaySets < ActiveRecord::Migration[5.2]
     create_table :play_sets do |t|
       t.integer :dj_id
       t.integer :festival_id
-      t.date :date
+      t.integer :duration
      
       t.timestamps
     end
