@@ -11,7 +11,7 @@ class Festival < ActiveRecord::Base
           end
     end
 
-    def self.new_user
+    def self.new_festival
         puts "What is your name?"
             name = gets.chomp
         if Festival.find_by(promoter: name)

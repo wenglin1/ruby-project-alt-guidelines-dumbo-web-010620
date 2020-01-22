@@ -48,6 +48,7 @@ class Dj < ActiveRecord::Base
     end
 
     def self.dj_menu
+        #puts "#{name}, please choose form one of the following options"
         #tty prompt menu
         #current_sets.item -> my_sets(owned by dj)
         #book_set.item -> book_set
