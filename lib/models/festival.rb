@@ -43,6 +43,7 @@ class Festival < ActiveRecord::Base
         TTY::Prompt.new.select("Hi! Would you like to log in or create a festival?") do |menu_item|
             menu_item.choice "View sets", -> {self.get_sets(festival_info)}
             menu_item.choice "Create a set", -> {self.set_create(festival_info)}
+            menu_item.choice "Cancel Festival", -> {self.destroy_festival(festival_info)}
             menu_item.choice "Take me back to the main menu", -> {App.end}
         end
     end
@@ -54,20 +55,34 @@ class Festival < ActiveRecord::Base
         self.festival_menu(festival_info)
     end
 
+    def get_sets(festival_info)
+        sets =  PlaySet.all.map do |n|
+            n.name
+        end
+        sets.each_with_index do |n, i|
+            puts "#{1 + i}. #{n}"
+        end
+    end
+
     def self.reject_input
         puts "Sorry, that name does not exist in our system, please try again"
         self.user_return
     end
     
-    def self.get_djs(festival_info)
-       djs =  Dj.all.map do |n|
-            n.name
+    def self.get_sets(festival_info)
+       play_sets =  PlaySet.all.select do |n|
+            n.festival_id == festival_info.id
         end
-        djs.each_with_index do |n, i|
-            puts "#{1 + i}. #{n}"
+        play_sets.each_with_index do |n, i|
+            puts "#{1 + i}. Set duration - #{n}min."
         end
     end
 
+    def self.destroy_festival(festival_info)
+        self.destroy(festival_info.id)
+        sleep (0.02)
+        App.end
+    end
 
     
 end
