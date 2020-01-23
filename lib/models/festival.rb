@@ -55,15 +55,6 @@ class Festival < ActiveRecord::Base
         self.festival_menu(festival_info)
     end
 
-    def get_sets(festival_info)
-        sets =  PlaySet.all.map do |n|
-            n.name
-        end
-        sets.each_with_index do |n, i|
-            puts "#{1 + i}. #{n}"
-        end
-    end
-
     def self.reject_input
         puts "Sorry, that name does not exist in our system, please try again"
         self.user_return
@@ -74,7 +65,7 @@ class Festival < ActiveRecord::Base
             n.festival_id == festival_info.id
         end
         play_sets.each_with_index do |n, i|
-            puts "#{1 + i}. Set duration - #{n}min."
+            puts "#{1 + i}. Set duration - #{n.duration}min."
         end
     end
 

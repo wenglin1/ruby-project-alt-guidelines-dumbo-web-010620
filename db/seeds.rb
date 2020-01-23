@@ -3,6 +3,7 @@ DatabaseCleaner.clean_with(:truncation)
 
 Festival.destroy_all 
 Dj.destroy_all
+PlaySet.destroy_all
 
 
 ###DJs
@@ -25,7 +26,7 @@ summer_jam = Festival.create(name: "Summer Jam 2020", location: "East Rutherford
 dance_frenzy = Festival.create(name: "Dance Party 2020", location: "TBD", budget: 1200000, date: 'September 30, 2020')
 
 
-s1 = PlaySet.create(dj_id: 2, festival_id: 1, duration: 98)
-s2 = PlaySet.create(dj_id: 2, festival_id: 2, duration: 98)
-s3 = PlaySet.create(dj_id: 2, festival_id: 3, duration: 98)
-s4 = PlaySet.create(dj_id: 2, festival_id: 4, duration: 98)
+s1 = PlaySet.create(dj_id: 2, festival_id: 1, duration: 105)
+s2 = PlaySet.create(dj_id: 3, festival_id: 2, duration: 225)
+s3 = PlaySet.create(dj_id: 1, festival_id: 3, duration: 65)
+s4 = PlaySet.create(dj_id: 2, festival_id: 4, duration: 90)
