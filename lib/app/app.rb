@@ -13,7 +13,9 @@ class App
 
     def welcome
         clear
-        puts "Welcome"
+        puts "Welcome to FESTIBOOK"
+        sleep (2)
+        clear
     end
 
 #*****************MAIN MENU**********************
@@ -22,18 +24,17 @@ class App
         TTY::Prompt.new.select("Are you a Dj or a Festival?") do |menu|
             menu.choice "Dj", -> {login_dj_menu}
             menu.choice "Festival", -> {login_festival_menu}
-            menu.choice "Exit"
+            menu.choice "Exit", -> {good_bye}
         end
         clear
     end
-
-#*******************MENUS********************
 
     def login_dj_menu
         TTY::Prompt.new.select("Hi! Are you a new or returning DJ?") do |menu|
             menu.choice "I'm a new DJ", -> {new_dj}
             menu.choice "Nope, I'm a returning DJ", -> {returning_dj}
             menu.choice "Take me back to the main menu", -> {main_menu}
+            menu.choice "Exit", -> {good_bye}
         end
         clear
     end
@@ -46,10 +47,11 @@ class App
         sleep(0.2)
         puts "What genre of electronic dance music do you play?"
             dj_genre = gets.chomp.downcase.capitalize
-        puts "What is your hiring rate?"
+        puts "What is your hiring rate? (Enter the amount as 000000)"
             dj_rate = gets.chomp.to_i
             @dj_info = Dj.create(name: name, genre: dj_genre, rate: dj_rate)
         end
+        clear
         dj_menu
     end
 
@@ -60,23 +62,22 @@ class App
             reject_input
         else
             @dj_info = Dj.find_by(name: name)
-        end    
+        end
+        clear    
         dj_menu
     end
 
     def dj_menu
-        puts "Welcome back, #{@dj_info.name}"
+        puts "Welcome, #{@dj_info.name}"
         TTY::Prompt.new.select("Please choose from one of the following options") do |menu|
             menu.choice "View my sets", -> {self.all_sets}
             menu.choice "Book a set", -> {book_set}
             menu.choice "Delete Account", -> {self.destroy_dj}
             menu.choice "Exit", -> {good_bye}
         end
+        clear
     end
 
-#**************************************
-#**************HELPERS******************
-#***************************************
     def reject_input
         puts "Sorry, that name does not exist in our system, please try again"
         user_return
@@ -86,32 +87,62 @@ class App
         sets = PlaySet.all.select do |n|
             n.dj_id == @dj_info.id
         end
-        sets.each_with_index do |n, i|
-            puts "#{1 + i}. Duration: #{n.duration} minutes at"
+        if sets == []
+            puts "You have no sets right now, lets book some!"
+        else
+            sets.each_with_index do |n, i|
+                puts "#{1 + i}. Duration: #{n.duration} minutes at #{find_festival(n.festival_id)}"
+            end
         end
         sleep(2.0)
+        clear
         dj_menu
-    #map list of available sets not belonging to the dj
     end
 
     def destroy_dj
         Dj.find(@dj_info.id).destroy
-        sleep (0.02)
+        good_bye
+        sleep (2)
+        
+        clear
         main_menu
     end
 
     def book_set
-    #set_select- an array
-    #take array and use items to form selectable menu
-    #attach dj to a set if dj does not have set booked during designated time
+        sets = PlaySet.all.select do |n|
+            n.dj_id == nil
+        end
+        if sets == []
+            puts "There are no sets available right now"
+        else
+            sets.each_with_index do |set,i|
+                puts "#{i + 1}. #{set.duration} minutes at #{find_festival(set.festival_id)}"
+            end
+            pick_one = gets.chomp.to_i - 1
+            if !pick_one =~ /^-?[0-9]+$/ || (pick_one >= sets.length)
+                puts "Invalid input"
+            else
+                PlaySet.find(sets[pick_one].update(dj_id: @dj_info.id))
+                puts "Okay, I am booking for you right now"
+            end
+        end
+        sleep (1)
+        clear
+        dj_menu
     end  
     
+    def find_festival(festival_id)
+        Festival.all.find(festival_id).name
+    end
+
     def login_festival_menu
         TTY::Prompt.new.select("Hi! Would you like to log in or create a festival?") do |menu|
             menu.choice "I am a new festival", -> {new_festival}
             menu.choice "I have a festival", -> {returning_festival}
             menu.choice "Take me back to the main menu", -> {main_menu}
+            menu.choice "Exit", -> {good_bye}
         end
+        clear
     end
 
     def new_festival
@@ -132,12 +163,13 @@ class App
 
     def returning_festival
         puts "Welcome back! Enter your login information"
-        name = gets.chomp
+        name = gets.chomp.downcase.capitalize
         if !Festival.find_by(name: name)
             reject_input
         else
             @festival_info = Festival.find_by(name: name)    
         end
+        clear
         festival_menu
     end
 
@@ -148,37 +180,51 @@ class App
             menu.choice "Create a set", -> {set_create}
             menu.choice "Cancel Festival", -> {destroy_festival}
             menu.choice "Take me back to the main menu", -> {main_menu}
+            menu.choice "Exit", -> {good_bye}
         end
+        clear
     end
 
     def set_create
         puts "How long would you like to make this set?"
         time = gets.chomp
-        set_info = PlaySet.create(dj_id: 0,festival_id: @festival_info.id, duration: time)
+        set_info = PlaySet.create(festival_id: @festival_info.id, duration: time)
+        clear
         festival_menu
     end
 
     def reject_input
         puts "Sorry, that name does not exist in our system, please try again"
+        clear
         main_menu
     end
 
     def get_sets
+
         play_sets =  PlaySet.all.select do |n|
             n.festival_id == @festival_info.id
         end
-        play_sets.each_with_index do |n, i|
-            puts "#{1 + i}. Set duration - #{n.duration} minutes"
+
+        if play_sets == []
+            puts "You have no sets available, please create some."
+        else
+            play_sets.each_with_index do |n, i|
+                puts "#{1 + i}. Set duration - #{n.duration} minutes"
+            end
         end
+        sleep (2)
+        clear
         festival_menu
     end
 
     def destroy_festival
         Festival.find(@festival_info.id).destroy
-        sleep (0.02)
+        good_bye
+        sleep (2)
+        clear
         main_menu
     end
-#**************HELPER METHODS*******************
+
     def clear
         system 'clear'
     end
@@ -188,5 +234,6 @@ class App
                     THANKS FOR STOPPING BY!!".colorize(:light_yellow)
         puts "
                             COME BACK AGAIN!! \u{1f44B}".colorize(:light_yellow)
-        end
+        sleep (2)
     end
+end
