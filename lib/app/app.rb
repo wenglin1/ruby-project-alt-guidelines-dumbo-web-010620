@@ -5,7 +5,7 @@ class App
     def initialize()
         @prompt = TTY::Prompt.new
     end 
-#*****************APP LOAD SCREEN****************
+
     def app_start
         welcome
         main_menu
@@ -17,8 +17,6 @@ class App
         sleep (2)
         clear
     end
-
-#*****************MAIN MENU**********************
 
     def main_menu
         TTY::Prompt.new.select("Are you a Dj or a Festival?") do |menu|
